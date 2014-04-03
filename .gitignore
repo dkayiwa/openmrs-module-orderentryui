@@ -17,10 +17,12 @@ api/.classpath
 api/.project
 api/.settings/*
 api/target/*
+api/bin/*
 api/.externalToolBuilders/*
 omod/.classpath
 omod/.project
 omod/.settings/*
 omod/target/*
+omod/bin/*
 omod/.externalToolBuilders/*
 /.settings
