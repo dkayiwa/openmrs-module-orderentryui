@@ -1,0 +1,26 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.iml
+/.settings
+/.project
+/.classpath
+
+.classpath
+.idea
+.project
+.settings/*
+api/.classpath
+api/.project
+api/.settings/*
+api/target/*
+api/.externalToolBuilders/*
+omod/.classpath
+omod/.project
+omod/.settings/*
+omod/target/*
+omod/.externalToolBuilders/*
+/.settings
