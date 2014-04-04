@@ -22,6 +22,11 @@
 					<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
+				<td>
+					Patient Care Setting
+					<form:radiobutton path="dosingType" value="SIMPLE"/> In Patient
+					<form:radiobutton path="dosingType" value="FREE_TEXT"/> Out Patient
+				</td>
 			</tr>
 			<tr>
 				<th>Type of dosage</th>
