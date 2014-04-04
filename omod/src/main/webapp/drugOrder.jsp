@@ -51,7 +51,7 @@
 					
 					<select name="${status.expression}">
 						<c:forEach items="${frequencies}" var="frequency">
-				        	<option value="${frequency.frequencyId}" <c:if test="${frequency.orderFrequencyId == status.value}">selected="selected"</c:if>>
+				        	<option value="${frequency.orderFrequencyId}" <c:if test="${frequency.orderFrequencyId == status.value}">selected="selected"</c:if>>
 				        		${frequency.name}
 				        	</option>
 				        </c:forEach>
