@@ -31,18 +31,15 @@
 			<tr>
 				<th>Drug</th>
 				<td>
-					<spring:bind path="drug.concept">
-						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="concept" initialValue="${status.value}" includeClasses="Drug"/>
+					<spring:bind path="drug">
+						<openmrs_tag:drugField formFieldName="${status.expression}" initialValue="${status.value}" drugs="${drugs}"/>
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
 				<td>
 					Patient Care Setting
-					<spring:bind path="careSetting">
-						<form:radiobutton path="careSetting" value="INPATIENT"/>In Patient
-						<form:radiobutton path="careSetting" value="OUTPATIENT"/> Out Patient
-						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
-					</spring:bind>
+					<form:radiobutton path="careSetting" value="2"/>In Patient
+					<form:radiobutton path="careSetting" value="1"/> Out Patient
 				</td>
 			</tr>
 			<tr>
@@ -57,6 +54,24 @@
 				<td>
 					<spring:bind path="dose">
 						<input type="text" name="dose" value="${status.value}"/>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr>
+				<th>Dose Units</th>
+				<td>
+					<spring:bind path="doseUnits">
+						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="doseUnits" initialValue="${status.value}" />
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr>
+				<th>Route</th>
+				<td>
+					<spring:bind path="route">
+						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="route" initialValue="${status.value}" />
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>

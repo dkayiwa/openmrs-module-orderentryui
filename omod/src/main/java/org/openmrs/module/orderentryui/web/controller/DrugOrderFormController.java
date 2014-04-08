@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DrugOrderFormController {
 	
 	@RequestMapping(value = "/module/orderentryui/drugOrder", method = RequestMethod.GET)
-	public void showForm(ModelMap model) {
+	public void showForm() {
 		
 	}
 	
@@ -45,6 +45,7 @@ public class DrugOrderFormController {
 		}
 		
 		model.put("frequencies", Context.getOrderService().getOrderFrequencies(true));
+		model.put("drugs", Context.getConceptService().getAllDrugs());
 		
 		return drugOrder;
 	}
@@ -53,14 +54,20 @@ public class DrugOrderFormController {
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(OrderFrequency.class, new OrderFrequencyEditor());
 		binder.registerCustomEditor(DosingType.class, new DosingTypeEditor());
-		//binder.registerCustomEditor(CareSetting.class, new CareSettingEditor());
+		binder.registerCustomEditor(CareSetting.class, new CareSettingEditor());
 	}
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.POST, value = "/module/orderentryui/drugOrder")
-	public String saveDrugOrder(HttpServletRequest request, @ModelAttribute("drugOrder") DrugOrder drugOrder, BindingResult result,
-	        ModelMap model) {
-
+	public String saveDrugOrder(HttpServletRequest request, @ModelAttribute("drugOrder") DrugOrder drugOrder, BindingResult result) {
+		
+		if (drugOrder.getOrderer() == null) {
+			drugOrder.setOrderer(Context.getProviderService().getProvider(1));
+			drugOrder.setConcept(drugOrder.getDrug().getConcept());
+			drugOrder.setEncounter(Context.getEncounterService().getEncountersByPatient(drugOrder.getPatient()).get(0));
+			drugOrder.setOrderType(Context.getOrderService().getOrderType(1));
+		}
+		
 		new DrugOrderValidator().validate(drugOrder, result);
 		if (!result.hasErrors()) {
 			try {
