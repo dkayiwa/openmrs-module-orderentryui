@@ -11,7 +11,7 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.orderentryui.web.controller;
+package org.openmrs.module.orderentryui.web.controller.portlet;
 
 import java.util.Map;
 
@@ -26,9 +26,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("**/drugOrders.portlet")
-public class DrugOrderPortletController extends PortletController {
-
+@RequestMapping("**/labOrders.portlet")
+public class LabOrderPortletController extends PortletController {
+	
 	/**
      * @see org.openmrs.web.controller.PortletController#populateModel(javax.servlet.http.HttpServletRequest, java.util.Map)
      */

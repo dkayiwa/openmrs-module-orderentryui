@@ -13,7 +13,9 @@
  */
 package org.openmrs.module.orderentryui.web.controller;
 
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class RadiologyOrderFormController {
 	
 }
