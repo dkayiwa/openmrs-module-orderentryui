@@ -77,6 +77,33 @@
 				</td>
 			</tr>
 			<tr>
+				<th>Quantity</th>
+				<td>
+					<spring:bind path="quantity">
+						<input type="text" name="quantity" value="${status.value}"/>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr>
+				<th>Quantity Units</th>
+				<td>
+					<spring:bind path="quantityUnits">
+						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="quantityUnits" initialValue="${status.value}" />
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr>
+				<th>Number of Refills</th>
+				<td>
+					<spring:bind path="numRefills">
+						<input type="text" name="numRefills" value="${status.value}"/>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr>
 				<th>Frequency</th>
 				<td>
 					<spring:bind path="frequency">
@@ -87,6 +114,15 @@
 					        	</option>
 					        </c:forEach>
 						</select>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr>
+				<th>Instructions</th>
+				<td>
+					<spring:bind path="instructions">
+						<input type="text" name="instructions" value="${status.value}"/>
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
