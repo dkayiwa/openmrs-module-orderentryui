@@ -20,6 +20,15 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach items="${model.orders}" var="order">
+				        	<tr>
+				        		<td>Drug Order</td>
+				        		<td>${order.drug.name}</td>
+				        		<td>${order.dose}</td>
+				        		<td>${order.frequency}</td>
+				        		<td>${order.dosingInstructions}</td>
+				        	</tr>
+				        </c:forEach>
 					</tbody>
 				</table>
 			</div>
