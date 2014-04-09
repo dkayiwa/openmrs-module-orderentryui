@@ -1,8 +1,11 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 
 <script type="text/javascript">
-	<openmrs:authentication>var userId = "${authenticatedUser.userId}";</openmrs:authentication>
 
+	var deleteRow;
+
+	<openmrs:authentication>var userId = "${authenticatedUser.userId}";</openmrs:authentication>
+	
 	//initTabs
 	$j(document).ready(function() {
 		var c = getTabCookie();
@@ -52,6 +55,29 @@
 		}
 		return false;
     }
+	
+	function reviseOrder(row) {
+		if (!confirm("Are you sure you want to revise this order?")) {
+			return;
+		}
+		
+		deleteRow = row;
+		
+		var table = document.getElementById("drugOrdersTable");
+		table.deleteRow(deleteRow.rowIndex);
+	}
+	
+	function discontinueOrder(row) {
+		if (!confirm("Are you sure you want to discontinue this order?")) {
+			return;
+		}
+		
+		deleteRow = row;
+		
+		var table = document.getElementById("drugOrdersTable");
+		table.deleteRow(deleteRow.rowIndex);
+	}
+	
 </script>
 
 <div id="portletDrugOrders">
@@ -76,11 +102,13 @@
 					<tbody>
 						<c:forEach items="${model.orders}" var="order">
 				        	<tr>
-				        		<td>Drug Order</td>
+				        		<td><a href="">Drug Order</a></td>
 				        		<td>${order.drug.name}</td>
 				        		<td>${order.dose}</td>
 				        		<td>${order.frequency}</td>
 				        		<td>${order.dosingInstructions}</td>
+				        		<td><a href="#" onclick="javascript:reviseOrder(this.parentNode.parentNode);">Revise /</a></td>
+				        		<td><a href="#" onclick="javascript:discontinueOrder(this.parentNode.parentNode);">Discontinue</a></td>
 				        	</tr>
 				        </c:forEach>
 					</tbody>

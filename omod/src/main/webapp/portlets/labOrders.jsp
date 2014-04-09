@@ -22,11 +22,13 @@
 					<tbody>
 						<c:forEach items="${model.orders}" var="order">
 				        	<tr>
-				        		<td>Lab Order</td>
+				        		<td><a href="">Lab Order</a></td>
 				        		<td>${order.drug.name}</td>
 				        		<td>${order.dose}</td>
 				        		<td>${order.frequency}</td>
 				        		<td>${order.dosingInstructions}</td>
+				        		<td><a href="">Revise /</a></td>
+				        		<td><a href="">Discontinue</a></td>
 				        	</tr>
 				        </c:forEach>
 					</tbody>
