@@ -31,6 +31,14 @@
 		<class>${project.parent.groupId}.${project.parent.artifactId}.extension.html.OrdersPatientDashboardTabExt</class>
 	</extension>
 	
+	<dwr>
+		<allow>
+			<create creator="new" javascript="DWROrderEntryUIService">
+				<param name="class" value="${project.parent.groupId}.${project.parent.artifactId}.web.DWROrderEntryUIService"/>
+			</create>
+		</allow>
+	</dwr>
+	
 	<!-- Maps hibernate file's, if present -->
 	<mappingFiles>
 				

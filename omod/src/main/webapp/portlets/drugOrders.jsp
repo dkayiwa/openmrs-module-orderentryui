@@ -1,5 +1,9 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 
+<openmrs:htmlInclude file="/dwr/engine.js"/>
+<openmrs:htmlInclude file="/dwr/util.js"/>
+<openmrs:htmlInclude file="/dwr/interface/DWROrderEntryUIService.js"/>
+
 <script type="text/javascript">
 
 	var deleteRow;
@@ -56,23 +60,39 @@
 		return false;
     }
 	
-	function reviseOrder(row) {
+	function reviseOrder(row, orderId) {
 		if (!confirm("Are you sure you want to revise this order?")) {
 			return;
 		}
 		
 		deleteRow = row;
-		
-		var table = document.getElementById("drugOrdersTable");
-		table.deleteRow(deleteRow.rowIndex);
+		DWROrderEntryUIService.reviseOrder(orderId, onOrderDiscontinued);
 	}
 	
-	function discontinueOrder(row) {
+	function discontinueOrder(row, orderId) {
 		if (!confirm("Are you sure you want to discontinue this order?")) {
 			return;
 		}
 		
 		deleteRow = row;
+		DWROrderEntryUIService.discontinueOrder(orderId, onOrderRevised);
+	}
+	
+	function onOrderRevised(String result) {
+		if (result != null) {
+			alert(result);
+			return;
+		}
+		
+		var table = document.getElementById("drugOrdersTable");
+		table.deleteRow(deleteRow.rowIndex);
+	}
+	
+	function onOrderDiscontinued(String result) {
+		if (result != null) {
+			alert(result);
+			return;
+		}
 		
 		var table = document.getElementById("drugOrdersTable");
 		table.deleteRow(deleteRow.rowIndex);
@@ -107,8 +127,8 @@
 				        		<td>${order.dose}</td>
 				        		<td>${order.frequency}</td>
 				        		<td>${order.dosingInstructions}</td>
-				        		<td><a href="#" onclick="javascript:reviseOrder(this.parentNode.parentNode);">Revise /</a></td>
-				        		<td><a href="#" onclick="javascript:discontinueOrder(this.parentNode.parentNode);">Discontinue</a></td>
+				        		<td><a href="#" onclick="javascript:reviseOrder(this.parentNode.parentNode, ${order.orderId});">Revise /</a></td>
+				        		<td><a href="#" onclick="javascript:discontinueOrder(this.parentNode.parentNode, ${order.orderId});">Discontinue</a></td>
 				        	</tr>
 				        </c:forEach>
 					</tbody>
