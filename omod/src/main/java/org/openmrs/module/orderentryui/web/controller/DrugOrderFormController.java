@@ -53,6 +53,7 @@ public class DrugOrderFormController {
 			drugOrder = Context.getOrderService().getOrder(drugOrderId);
 		else {
 			drugOrder = new DrugOrder();
+			drugOrder.setCareSetting(Context.getOrderService().getCareSetting(2));
 			if (patientId != null)
 				drugOrder.setPatient(Context.getPatientService().getPatient(patientId));
 		}
@@ -75,10 +76,10 @@ public class DrugOrderFormController {
 	public String saveDrugOrder(HttpServletRequest request, @ModelAttribute("drugOrder") DrugOrder drugOrder, BindingResult result) {
 		
 		if (drugOrder.getOrderer() == null) {
-			drugOrder.setOrderer(Context.getProviderService().getProvider(1));
+			drugOrder.setOrderer(Context.getProviderService().getAllProviders().get(0));
 			drugOrder.setConcept(drugOrder.getDrug().getConcept());
 			drugOrder.setEncounter(Context.getEncounterService().getEncountersByPatient(drugOrder.getPatient()).get(0));
-			drugOrder.setOrderType(Context.getOrderService().getOrderType(1));
+			drugOrder.setOrderType(Context.getOrderService().getOrderTypeByUuid("2ca568f3-a64a-11e3-9aeb-50e549534c5e"));
 		}
 		
 		new DrugOrderValidator().validate(drugOrder, result);

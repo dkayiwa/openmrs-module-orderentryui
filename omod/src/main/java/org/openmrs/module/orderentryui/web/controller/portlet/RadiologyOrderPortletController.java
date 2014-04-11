@@ -1,13 +1,11 @@
 package org.openmrs.module.orderentryui.web.controller.portlet;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.openmrs.CareSetting;
-import org.openmrs.OrderType;
-import org.openmrs.Patient;
-import org.openmrs.api.context.Context;
+import org.openmrs.Order;
 import org.openmrs.web.controller.PortletController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,10 +20,7 @@ public class RadiologyOrderPortletController extends PortletController {
     @Override
     protected void populateModel(HttpServletRequest request, Map<String, Object> model) {
 	    super.populateModel(request, model);
-	    
-	    Patient patient = (Patient)model.get("patient");
-	    OrderType orderType = Context.getOrderService().getOrderType(1);
-	    CareSetting careSetting = Context.getOrderService().getCareSetting(2);
-	    model.put("orders", Context.getOrderService().getOrders(patient, careSetting, orderType, false));
+
+	    model.put("orders", new ArrayList<Order>() /*Context.getOrderService().getOrders(patient, careSetting, null, false)*/);
     }
 }

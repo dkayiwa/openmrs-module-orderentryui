@@ -13,8 +13,6 @@
 					<thead>
 						<tr>
 							<th>Order Type</th>
-							<th>Medication</th>
-							<th>Dose</th>
 							<th>Frequency</th>
 							<th>Instructions</th>
 						</tr>
@@ -23,10 +21,8 @@
 						<c:forEach items="${model.orders}" var="order">
 				        	<tr>
 				        		<td><a href="">Radiology Order</a></td>
-				        		<td>${order.drug.name}</td>
-				        		<td>${order.dose}</td>
 				        		<td>${order.frequency}</td>
-				        		<td>${order.dosingInstructions}</td>
+				        		<td>${order.instructions}</td>
 				        		<td><a href="">Revise /</a></td>
 				        		<td><a href="">Discontinue</a></td>
 				        	</tr>

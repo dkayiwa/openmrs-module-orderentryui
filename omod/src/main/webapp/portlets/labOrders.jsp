@@ -1,5 +1,105 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 
+<openmrs:htmlInclude file="/dwr/engine.js"/>
+<openmrs:htmlInclude file="/dwr/util.js"/>
+<openmrs:htmlInclude file="/dwr/interface/DWROrderEntryUIService.js"/>
+
+<script type="text/javascript">
+
+	var deleteRow;
+
+	<openmrs:authentication>var userId = "${authenticatedUser.userId}";</openmrs:authentication>
+	
+	//initTabs
+	$j(document).ready(function() {
+		var c = getTabCookie();
+		if (c == null) {
+			var tabs = document.getElementById("patientTabs").getElementsByTagName("a");
+			if (tabs.length && tabs[0].id)
+				c = tabs[0].id;
+		}
+		changeTab(c);
+	});
+	
+	function setTabCookie(tabType) {
+		document.cookie = "labOrdersTab-" + userId + "="+escape(tabType);
+	}
+	
+	function getTabCookie() {
+		var cookies = document.cookie.match('labOrdersTab-' + userId + '=(.*?)(;|$)');
+		if (cookies) {
+			return unescape(cookies[1]);
+		}
+		return null;
+	}
+	
+	function changeTab(tabObj) {
+		if (!document.getElementById || !document.createTextNode) {return;}
+		if (typeof tabObj == "string")
+			tabObj = document.getElementById(tabObj);
+		
+		if (tabObj) {
+			var tabs = tabObj.parentNode.parentNode.getElementsByTagName('a');
+			for (var i=0; i<tabs.length; i++) {
+				if (tabs[i].className.indexOf('current') != -1) {
+					manipulateClass('remove', tabs[i], 'current');
+				}
+				var divId = tabs[i].id.substring(0, tabs[i].id.lastIndexOf("Tab"));
+				var divObj = document.getElementById(divId);
+				if (divObj) {
+					if (tabs[i].id == tabObj.id)
+						divObj.style.display = "";
+					else
+						divObj.style.display = "none";
+				}
+			}
+			addClass(tabObj, 'current');
+			
+			setTabCookie(tabObj.id);
+		}
+		return false;
+    }
+	
+	function reviseOrder(row, orderId) {
+		if (!confirm("Are you sure you want to revise this order?")) {
+			return;
+		}
+		
+		deleteRow = row;
+		DWROrderEntryUIService.reviseOrder(orderId, onOrderDiscontinued);
+	}
+	
+	function discontinueOrder(row, orderId) {
+		if (!confirm("Are you sure you want to discontinue this order?")) {
+			return;
+		}
+		
+		deleteRow = row;
+		DWROrderEntryUIService.discontinueOrder(orderId, onOrderRevised);
+	}
+	
+	function onOrderRevised(result) {
+		if (result != null) {
+			alert(result);
+			return;
+		}
+		
+		var table = document.getElementById("labOrdersTable");
+		table.deleteRow(deleteRow.rowIndex);
+	}
+	
+	function onOrderDiscontinued(result) {
+		if (result != null) {
+			alert(result);
+			return;
+		}
+		
+		var table = document.getElementById("labOrdersTable");
+		table.deleteRow(deleteRow.rowIndex);
+	}
+	
+</script>
+
 <div id="portletLabOrders">
 
 	<div id="labOrdersPortlet">
@@ -13,8 +113,7 @@
 					<thead>
 						<tr>
 							<th>Order Type</th>
-							<th>Medication</th>
-							<th>Dose</th>
+							<th>Test Type</th>
 							<th>Frequency</th>
 							<th>Instructions</th>
 						</tr>
@@ -23,12 +122,11 @@
 						<c:forEach items="${model.orders}" var="order">
 				        	<tr>
 				        		<td><a href="">Lab Order</a></td>
-				        		<td>${order.drug.name}</td>
-				        		<td>${order.dose}</td>
+				        		<td>${order.concept.name}</td>
 				        		<td>${order.frequency}</td>
-				        		<td>${order.dosingInstructions}</td>
-				        		<td><a href="">Revise /</a></td>
-				        		<td><a href="">Discontinue</a></td>
+				        		<td>${order.instructions}</td>
+				        		<td><a href="#" onclick="javascript:reviseOrder(this.parentNode.parentNode, ${order.orderId});">Revise /</a></td>
+				        		<td><a href="#" onclick="javascript:discontinueOrder(this.parentNode.parentNode, ${order.orderId});">Discontinue</a></td>
 				        	</tr>
 				        </c:forEach>
 					</tbody>

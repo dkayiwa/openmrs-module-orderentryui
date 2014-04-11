@@ -13,11 +13,14 @@
  */
 package org.openmrs.module.orderentryui.web.controller.portlet;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.openmrs.CareSetting;
+import org.openmrs.Order;
 import org.openmrs.OrderType;
 import org.openmrs.Patient;
 import org.openmrs.api.context.Context;
@@ -37,8 +40,12 @@ public class DrugOrderPortletController extends PortletController {
 	    super.populateModel(request, model);
 	    
 	    Patient patient = (Patient)model.get("patient");
-	    OrderType orderType = Context.getOrderService().getOrderType(1);
-	    CareSetting careSetting = Context.getOrderService().getCareSetting(2);
-	    model.put("orders", Context.getOrderService().getOrders(patient, careSetting, orderType, false));
+	    OrderType orderType = Context.getOrderService().getOrderTypeByUuid("2ca568f3-a64a-11e3-9aeb-50e549534c5e");
+	    List<Order> orders = new ArrayList<Order>();
+	    List<CareSetting> careSettings = Context.getOrderService().getCareSettings(false);
+	    for (CareSetting careSetting : careSettings) {
+	    	orders.addAll(Context.getOrderService().getOrders(patient, careSetting, orderType, false));
+	    }
+	    model.put("orders", orders);
     }
 }
