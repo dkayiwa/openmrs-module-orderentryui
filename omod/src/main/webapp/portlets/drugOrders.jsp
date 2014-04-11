@@ -78,7 +78,7 @@
 		DWROrderEntryUIService.discontinueOrder(orderId, onOrderRevised);
 	}
 	
-	function onOrderRevised(String result) {
+	function onOrderRevised(result) {
 		if (result != null) {
 			alert(result);
 			return;
@@ -88,7 +88,7 @@
 		table.deleteRow(deleteRow.rowIndex);
 	}
 	
-	function onOrderDiscontinued(String result) {
+	function onOrderDiscontinued(result) {
 		if (result != null) {
 			alert(result);
 			return;
