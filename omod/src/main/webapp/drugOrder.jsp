@@ -136,15 +136,6 @@
 					</spring:bind>
 				</td>
 			</tr>
-			<tr>
-				<th>Administration Instructions</th>
-				<td>
-					<spring:bind path="administrationInstructions">
-						<input type="text" name="administrationInstructions" value="${status.value}"/>
-						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
-					</spring:bind>
-				</td>
-			</tr>
 		</table>
 		
 		<br/>
