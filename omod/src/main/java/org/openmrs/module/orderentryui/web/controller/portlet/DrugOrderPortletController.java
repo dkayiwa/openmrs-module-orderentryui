@@ -40,7 +40,7 @@ public class DrugOrderPortletController extends PortletController {
 	    super.populateModel(request, model);
 	    
 	    Patient patient = (Patient)model.get("patient");
-	    OrderType orderType = Context.getOrderService().getOrderTypeByUuid("2ca568f3-a64a-11e3-9aeb-50e549534c5e");
+	    OrderType orderType = Context.getOrderService().getOrderTypeByUuid("131168f4-15f5-102d-96e4-000c29c2a5d7");
 	    List<Order> orders = new ArrayList<Order>();
 	    List<CareSetting> careSettings = Context.getOrderService().getCareSettings(false);
 	    for (CareSetting careSetting : careSettings) {
