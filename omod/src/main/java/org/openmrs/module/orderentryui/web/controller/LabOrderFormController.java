@@ -13,10 +13,13 @@
  */
 package org.openmrs.module.orderentryui.web.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.openmrs.CareSetting;
 import org.openmrs.DrugOrder.DosingType;
+import org.openmrs.Encounter;
 import org.openmrs.Order;
 import org.openmrs.OrderFrequency;
 import org.openmrs.TestOrder;
@@ -77,7 +80,14 @@ public class LabOrderFormController {
 		
 		if (labOrder.getOrderer() == null) {
 			labOrder.setOrderer(Context.getProviderService().getAllProviders().get(0));
-			labOrder.setEncounter(Context.getEncounterService().getEncountersByPatient(labOrder.getPatient()).get(0));
+			
+			Encounter encounter = new Encounter();
+			encounter.setPatient(labOrder.getPatient());
+			encounter.setEncounterDatetime(new Date());
+			encounter.setEncounterType(Context.getEncounterService().getAllEncounterTypes().get(0));
+			Context.getEncounterService().saveEncounter(encounter);
+			labOrder.setEncounter(encounter);
+			
 			labOrder.setOrderType(Context.getOrderService().getOrderTypeByUuid("52a447d3-a64a-11e3-9aeb-50e549534c5e"));
 		}
 		
