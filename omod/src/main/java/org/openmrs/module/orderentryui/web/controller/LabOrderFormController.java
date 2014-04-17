@@ -18,15 +18,15 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.openmrs.CareSetting;
-import org.openmrs.DrugOrder.DosingType;
 import org.openmrs.Encounter;
 import org.openmrs.Order;
 import org.openmrs.OrderFrequency;
 import org.openmrs.TestOrder;
+import org.openmrs.TestOrder.Laterality;
 import org.openmrs.api.APIException;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.orderentryui.propertyeditor.CareSettingEditor;
-import org.openmrs.module.orderentryui.propertyeditor.DosingTypeEditor;
+import org.openmrs.module.orderentryui.propertyeditor.LateralityEditor;
 import org.openmrs.module.orderentryui.propertyeditor.OrderFrequencyEditor;
 import org.openmrs.validator.OrderValidator;
 import org.openmrs.web.WebConstants;
@@ -70,7 +70,7 @@ public class LabOrderFormController {
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(OrderFrequency.class, new OrderFrequencyEditor());
-		binder.registerCustomEditor(DosingType.class, new DosingTypeEditor());
+		binder.registerCustomEditor(Laterality.class, new LateralityEditor());
 		binder.registerCustomEditor(CareSetting.class, new CareSettingEditor());
 	}
 	

@@ -58,6 +58,41 @@
 				</td>
 			</tr>
 			<tr>
+				<th>Specimen Source</th>
+				<td>
+					<spring:bind path="specimenSource">
+						<openmrs_tag:conceptField formFieldName="${status.expression}" initialValue="${status.value}" />
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr>
+				<th>Laterality</th>
+				<td>
+					<form:radiobutton path="laterality" value="LEFT"/> Left
+					<form:radiobutton path="laterality" value="RIGHT"/> Right
+					<form:radiobutton path="laterality" value="BILATERAL"/> Bilateral
+				</td>
+			</tr>
+			<tr>
+				<th>Clinical History</th>
+				<td>
+					<spring:bind path="clinicalHistory">
+						<input type="text" name="clinicalHistory" value="${status.value}"/>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr>
+				<th>Number of Repeats</th>
+				<td>
+					<spring:bind path="numberOfRepeats">
+						<input type="text" name="numberOfRepeats" value="${status.value}"/>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr>
 				<th>Instructions</th>
 				<td>
 					<spring:bind path="instructions">
