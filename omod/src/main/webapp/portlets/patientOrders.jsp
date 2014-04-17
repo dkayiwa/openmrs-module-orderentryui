@@ -58,7 +58,6 @@
 	<ul>
 		<li><a id="drugOrdersTab" href="#" onclick="return changeTab(this);" hidefocus="hidefocus"><openmrs:message code="orderentryui.drugOrder"/></a></li>
 		<li><a id="labOrdersTab" href="#" onclick="return changeTab(this);" hidefocus="hidefocus"><openmrs:message code="orderentryui.labOrder"/></a></li>
-		<li><a id="radiologyOrdersTab" href="#" onclick="return changeTab(this);" hidefocus="hidefocus"><openmrs:message code="orderentryui.radiologyOrder"/></a></li>
 	</ul>
 </div>
 
@@ -68,8 +67,5 @@
 	</div>
 	<div id="labOrders" style="display:none;">
 		<openmrs:portlet url="labOrders" id="labDashboardOrders" patientId="${patient.patientId}" moduleId="orderentryui" />
-	</div>
-	<div id="radiologyOrders" style="display:none;">
-		<openmrs:portlet url="radiologyOrders" id="radiologyDashboardOrders" patientId="${patient.patientId}" moduleId="orderentryui" />
 	</div>
 </div>	
