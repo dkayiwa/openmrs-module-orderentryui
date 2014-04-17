@@ -49,11 +49,11 @@ public class DrugOrderFormController {
 	}
 	
 	@ModelAttribute("drugOrder")
-	public Order getDrugOrder(@RequestParam(value = "drugOrderId", required = false) Integer drugOrderId,
+	public Order getDrugOrder(@RequestParam(value = "orderId", required = false) Integer orderId,
 	        @RequestParam(value = "patientId", required = false) Integer patientId, ModelMap model) {
 		Order drugOrder = null;
-		if (drugOrderId != null)
-			drugOrder = Context.getOrderService().getOrder(drugOrderId);
+		if (orderId != null)
+			drugOrder = Context.getOrderService().getOrder(orderId);
 		else {
 			drugOrder = new DrugOrder();
 			drugOrder.setCareSetting(Context.getOrderService().getCareSetting(2));

@@ -62,7 +62,7 @@
 				<th>Dose Units</th>
 				<td>
 					<spring:bind path="doseUnits">
-						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="doseUnits" initialValue="${status.value}" />
+						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="doseUnits" initialValue="${status.value}" includeClasses="Unit of Measurement" />
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
@@ -89,7 +89,7 @@
 				<th>Quantity Units</th>
 				<td>
 					<spring:bind path="quantityUnits">
-						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="quantityUnits" initialValue="${status.value}" />
+						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="quantityUnits" initialValue="${status.value}" includeClasses="Unit of Measurement" />
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
