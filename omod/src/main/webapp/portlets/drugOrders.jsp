@@ -65,8 +65,7 @@
 			return;
 		}
 		
-		deleteRow = row;
-		DWROrderEntryUIService.reviseOrder(orderId, onOrderDiscontinued);
+		window.location = "<openmrs:contextPath/>/module/orderentryui/drugOrder.form?patientId=${model.patient.patientId}&orderId=" + orderId + "&action=REVISE";
 	}
 	
 	function discontinueOrder(row, orderId) {
@@ -76,16 +75,6 @@
 		
 		deleteRow = row;
 		DWROrderEntryUIService.discontinueOrder(orderId, onOrderRevised);
-	}
-	
-	function onOrderRevised(result) {
-		if (result != null) {
-			alert(result);
-			return;
-		}
-		
-		var table = document.getElementById("drugOrdersTable");
-		table.deleteRow(deleteRow.rowIndex);
 	}
 	
 	function onOrderDiscontinued(result) {

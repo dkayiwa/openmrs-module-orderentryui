@@ -1,7 +1,14 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 <%@ include file="/WEB-INF/template/header.jsp" %>
 
-<h2>Write a new Lab Order</h2>
+<h2>
+<c:if test="${param.action == 'REVISE'}">
+Revise Lab Order
+</c:if>
+<c:if test="${param.action != 'REVISE'}">
+	Write a new Lab Order
+</c:if>
+</h2>
 
 <c:if test="${labOrder.patient.patientId != null}">
 	<a href="<openmrs:contextPath/>/patientDashboard.form?patientId=${labOrder.patient.patientId}">
@@ -25,6 +32,9 @@
 			<c:if test="${param.patientId != null}">
 				<input type="hidden" name="patientId" value="${param.patientId}"/>
 			</c:if>
+		</c:if>
+		<c:if test="${param.action == 'REVISE'}">
+			<input type="hidden" name="action" value="${param.action}"/>
 		</c:if>
 	
 		<table class="left-aligned-th" cellpadding="3" cellspacing="3">

@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.openmrs.CareSetting;
 import org.openmrs.DrugOrder;
-import org.openmrs.Encounter;
 import org.openmrs.DrugOrder.DosingType;
+import org.openmrs.Encounter;
 import org.openmrs.Order;
 import org.openmrs.OrderFrequency;
 import org.openmrs.api.APIException;
@@ -50,7 +50,9 @@ public class DrugOrderFormController {
 	
 	@ModelAttribute("drugOrder")
 	public Order getDrugOrder(@RequestParam(value = "orderId", required = false) Integer orderId,
-	        @RequestParam(value = "patientId", required = false) Integer patientId, ModelMap model) {
+	        @RequestParam(value = "patientId", required = false) Integer patientId,
+	        @RequestParam(value = "action", required = false) String action, ModelMap model) {
+		
 		Order drugOrder = null;
 		if (orderId != null)
 			drugOrder = Context.getOrderService().getOrder(orderId);
@@ -76,7 +78,17 @@ public class DrugOrderFormController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.POST, value = "/module/orderentryui/drugOrder")
-	public String saveDrugOrder(HttpServletRequest request, @ModelAttribute("drugOrder") DrugOrder drugOrder, BindingResult result) {
+	public String saveDrugOrder(HttpServletRequest request, 
+	                            @RequestParam(value = "action", required = false) String action,
+	                            @ModelAttribute("drugOrder") DrugOrder drugOrder, 
+	                            BindingResult result) {
+		
+		if ("REVISE".equals(drugOrder)) {
+			DrugOrder revisedOrder = drugOrder.cloneForRevision();
+			revisedOrder.setEncounter(drugOrder.getEncounter());
+			revisedOrder.setOrderer(drugOrder.getOrderer());
+			drugOrder = revisedOrder;
+		}
 		
 		if (drugOrder.getOrderer() == null) {
 			drugOrder.setOrderer(Context.getProviderService().getAllProviders().get(0));

@@ -50,10 +50,13 @@ public class LabOrderFormController {
 	
 	@ModelAttribute("labOrder")
 	public Order getLabOrder(@RequestParam(value = "orderId", required = false) Integer orderId,
-	        @RequestParam(value = "patientId", required = false) Integer patientId, ModelMap model) {
+	        @RequestParam(value = "patientId", required = false) Integer patientId,
+	        @RequestParam(value = "action", required = false) String action, ModelMap model) {
+		
 		Order labOrder = null;
-		if (orderId != null)
+		if (orderId != null) {
 			labOrder = Context.getOrderService().getOrder(orderId);
+		}
 		else {
 			labOrder = new TestOrder();
 			labOrder.setCareSetting(Context.getOrderService().getCareSetting(2));
@@ -76,7 +79,17 @@ public class LabOrderFormController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.POST, value = "/module/orderentryui/labOrder")
-	public String saveLabOrder(HttpServletRequest request, @ModelAttribute("labOrder") TestOrder labOrder, BindingResult result) {
+	public String saveLabOrder(HttpServletRequest request,
+	                           @RequestParam(value = "action", required = false) String action,
+	                           @ModelAttribute("labOrder") TestOrder labOrder, BindingResult result) {
+		
+		
+		if ("REVISE".equals(action)) {
+			TestOrder revisedOrder = labOrder.cloneForRevision();
+			revisedOrder.setEncounter(labOrder.getEncounter());
+			revisedOrder.setOrderer(labOrder.getOrderer());
+			labOrder = revisedOrder;
+		}
 		
 		if (labOrder.getOrderer() == null) {
 			labOrder.setOrderer(Context.getProviderService().getAllProviders().get(0));

@@ -21,21 +21,6 @@ import org.openmrs.api.context.Context;
 
 public class DWROrderEntryUIService {
 	
-	public String reviseOrder(Integer orderId) {
-		try {
-			Order order = Context.getOrderService().getOrder(orderId);
-			Order revisedOrder = order.cloneForRevision();
-			revisedOrder.setEncounter(order.getEncounter());
-			revisedOrder.setOrderer(order.getOrderer());
-			Context.getOrderService().saveOrder(revisedOrder, null);
-		}
-		catch (Exception ex) {
-			return ex.getMessage();
-		}
-		
-		return null;
-	}
-	
 	public String discontinueOrder(Integer orderId) {
 		try {
 			Order order = Context.getOrderService().getOrder(orderId);
