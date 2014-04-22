@@ -74,7 +74,7 @@
 		}
 		
 		deleteRow = row;
-		DWROrderEntryUIService.discontinueOrder(orderId, onOrderRevised);
+		DWROrderEntryUIService.discontinueOrder(orderId, onOrderDiscontinued);
 	}
 	
 	function onOrderDiscontinued(result) {
