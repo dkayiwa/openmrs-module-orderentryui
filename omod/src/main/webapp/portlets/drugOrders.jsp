@@ -111,7 +111,7 @@
 					<tbody>
 						<c:forEach items="${model.orders}" var="order">
 				        	<tr>
-				        		<td><a href="<openmrs:contextPath/>/module/orderentryui/drugOrder.form?patientId=${order.patient.patientId}&orderId=${order.orderId}">Drug Order</a></td>
+				        		<td>Drug Order</td>
 				        		<td>${order.drug.name}</td>
 				        		<td>${order.dose}</td>
 				        		<td>${order.frequency}</td>
