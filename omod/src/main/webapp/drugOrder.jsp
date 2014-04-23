@@ -2,10 +2,10 @@
 <%@ include file="/WEB-INF/template/header.jsp" %>
 
 <h2>
-<c:if test="${param.action == 'revise'}">
+<c:if test="${param.action == 'REVISE'}">
 Revise Drug Order
 </c:if>
-<c:if test="${param.action != 'revise'}">
+<c:if test="${param.action != 'REVISE'}">
 	Write a new Drug Order
 </c:if>
 </h2>
