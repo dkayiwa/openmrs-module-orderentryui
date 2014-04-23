@@ -83,7 +83,7 @@ public class DrugOrderFormController {
 	                            @ModelAttribute("drugOrder") DrugOrder drugOrder, 
 	                            BindingResult result) {
 		
-		if ("REVISE".equals(drugOrder)) {
+		if ("REVISE".equals(action)) {
 			DrugOrder revisedOrder = drugOrder.cloneForRevision();
 			revisedOrder.setEncounter(drugOrder.getEncounter());
 			revisedOrder.setOrderer(drugOrder.getOrderer());
