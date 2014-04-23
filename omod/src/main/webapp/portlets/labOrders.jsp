@@ -60,7 +60,7 @@
 		return false;
     }
 	
-	function reviseOrder(row, orderId) {
+	function reviseLabOrder(row, orderId) {
 		if (!confirm("Are you sure you want to revise this order?")) {
 			return;
 		}
@@ -68,16 +68,16 @@
 		window.location = "<openmrs:contextPath/>/module/orderentryui/labOrder.form?patientId=${model.patient.patientId}&orderId=" + orderId + "&action=REVISE";
 	}
 	
-	function discontinueOrder(row, orderId) {
+	function discontinueLabOrder(row, orderId) {
 		if (!confirm("Are you sure you want to discontinue this order?")) {
 			return;
 		}
 		
 		deleteRow = row;
-		DWROrderEntryUIService.discontinueOrder(orderId, onOrderDiscontinued);
+		DWROrderEntryUIService.discontinueOrder(orderId, onLabOrderDiscontinued);
 	}
 	
-	function onOrderDiscontinued(result) {
+	function onLabOrderDiscontinued(result) {
 		if (result != null) {
 			alert(result);
 			return;
@@ -114,8 +114,8 @@
 				        		<td>${order.concept.name}</td>
 				        		<td>${order.frequency}</td>
 				        		<td>${order.instructions}</td>
-				        		<td><a href="#" onclick="javascript:reviseOrder(this.parentNode.parentNode, ${order.orderId});">Revise /</a></td>
-				        		<td><a href="#" onclick="javascript:discontinueOrder(this.parentNode.parentNode, ${order.orderId});">Discontinue</a></td>
+				        		<td><a href="#" onclick="javascript:reviseLabOrder(this.parentNode.parentNode, ${order.orderId});">Revise /</a></td>
+				        		<td><a href="#" onclick="javascript:discontinueLabOrder(this.parentNode.parentNode, ${order.orderId});">Discontinue</a></td>
 				        	</tr>
 				        </c:forEach>
 					</tbody>
