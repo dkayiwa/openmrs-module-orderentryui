@@ -72,7 +72,7 @@ Revise Drug Order
 				<th>Dose Units</th>
 				<td>
 					<spring:bind path="doseUnits">
-						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="doseUnits" initialValue="${status.value}" includeClasses="Unit of Measurement" />
+						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="doseUnits" initialValue="${status.value}" includeClasses="Units of Measure" />
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
@@ -99,7 +99,7 @@ Revise Drug Order
 				<th>Quantity Units</th>
 				<td>
 					<spring:bind path="quantityUnits">
-						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="quantityUnits" initialValue="${status.value}" includeClasses="Unit of Measurement" />
+						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="quantityUnits" initialValue="${status.value}" includeClasses="Units of Measure" />
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
