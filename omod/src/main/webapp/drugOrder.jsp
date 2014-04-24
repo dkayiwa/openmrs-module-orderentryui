@@ -81,7 +81,13 @@ Revise Drug Order
 				<th>Route</th>
 				<td>
 					<spring:bind path="route">
-						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="route" initialValue="${status.value}" />
+						<select name="${status.expression}">
+							<c:forEach items="${drugRoutes}" var="drugRoute">
+					        	<option value="${drugRoute.conceptId}" <c:if test="${drugRoute.conceptId == status.value}">selected="selected"</c:if>>
+					        		${drugRoute.name.name}
+					        	</option>
+					        </c:forEach>
+						</select>
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
