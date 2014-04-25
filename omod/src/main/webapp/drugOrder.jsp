@@ -82,6 +82,7 @@ Revise Drug Order
 				<td>
 					<spring:bind path="route">
 						<select name="${status.expression}">
+							<option></option>
 							<c:forEach items="${drugRoutes}" var="drugRoute">
 					        	<option value="${drugRoute.conceptId}" <c:if test="${drugRoute.conceptId == status.value}">selected="selected"</c:if>>
 					        		${drugRoute.name.name}
