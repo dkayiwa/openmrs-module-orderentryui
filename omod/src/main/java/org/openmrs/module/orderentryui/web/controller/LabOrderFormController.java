@@ -59,7 +59,7 @@ public class LabOrderFormController {
 		}
 		else {
 			labOrder = new TestOrder();
-			labOrder.setCareSetting(Context.getOrderService().getCareSetting(2));
+			labOrder.setCareSetting(Context.getOrderService().getCareSetting(1));
 			if (patientId != null)
 				labOrder.setPatient(Context.getPatientService().getPatient(patientId));
 		}
@@ -101,6 +101,7 @@ public class LabOrderFormController {
 			Context.getEncounterService().saveEncounter(encounter);
 			labOrder.setEncounter(encounter);
 			
+			// Ideally, the API would do this for you
 			labOrder.setOrderType(Context.getOrderService().getOrderTypeByUuid("52a447d3-a64a-11e3-9aeb-50e549534c5e"));
 		}
 		
