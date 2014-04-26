@@ -21,7 +21,7 @@ Revise Lab Order
     <openmrs_tag:errorNotify errors="${errors}" />
 </spring:hasBindErrors>
 
-<b class="boxHeader">Lab Order Details</b>
+<b class="boxHeader">Test Order Details</b>
 <div class="box">
 	<form:form method="post" action="labOrder.form" modelAttribute="labOrder">
 	
@@ -39,17 +39,18 @@ Revise Lab Order
 	
 		<table class="left-aligned-th" cellpadding="3" cellspacing="3">
 			<tr>
-				<th>Test Type</th>
+				<th>Care Setting</th>
+				<td>
+					<form:radiobutton id="outpatient" path="careSetting" value="1" /> <label for="outpatient">Outpatient</label>
+					<form:radiobutton id="inpatient" path="careSetting" value="2"/> <label for="inpatient">Inpatient</label>
+				</td>
+			<tr>
+				<th>Test</th>
 				<td>
 					<spring:bind path="concept">
 						<openmrs_tag:conceptField formFieldName="${status.expression}" initialValue="${status.value}" />
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
-				</td>
-				<td>
-					Patient Care Setting
-					<form:radiobutton path="careSetting" value="2"/>In Patient
-					<form:radiobutton path="careSetting" value="1"/> Out Patient
 				</td>
 			</tr>
 			<tr>
@@ -68,20 +69,8 @@ Revise Lab Order
 				</td>
 			</tr>
 			<tr>
-				<th>Specimen Source</th>
-				<td>
-					<spring:bind path="specimenSource">
-						<openmrs_tag:conceptField formFieldName="${status.expression}" initialValue="${status.value}" />
-						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
-					</spring:bind>
-				</td>
-			</tr>
-			<tr>
-				<th>Laterality</th>
-				<td>
-					<form:radiobutton path="laterality" value="LEFT"/> Left
-					<form:radiobutton path="laterality" value="RIGHT"/> Right
-					<form:radiobutton path="laterality" value="BILATERAL"/> Bilateral
+				<td colspan="2">
+					<em>Additional detail (include when appropriate)</em>
 				</td>
 			</tr>
 			<tr>
@@ -94,21 +83,23 @@ Revise Lab Order
 				</td>
 			</tr>
 			<tr>
-				<th>Number of Repeats</th>
+				<th>Specimen Source</th>
 				<td>
-					<spring:bind path="numberOfRepeats">
-						<input type="text" name="numberOfRepeats" value="${status.value}"/>
+					<spring:bind path="specimenSource">
+						<openmrs_tag:conceptField formFieldName="${status.expression}" initialValue="${status.value}" />
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
 			</tr>
 			<tr>
-				<th>Instructions</th>
+				<th>Laterality</th>
 				<td>
-					<spring:bind path="instructions">
-						<input type="text" name="instructions" value="${status.value}"/>
-						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
-					</spring:bind>
+					<select name="laterality">
+						<option value=""></option>
+						<option value="LEFT">left</option>
+						<option value="RIGHT">right</option>
+						<option value="BILATERAL">bilateral</option>
+					</select>
 				</td>
 			</tr>
 		</table>
@@ -120,7 +111,7 @@ Revise Lab Order
 		<c:if test="${not empty param.patientId}">
 			<c:set var="cancelUrl" value="${pageContext.request.contextPath}/patientDashboard.form?patientId=${param.patientId}" />
 		</c:if>
-		<input type="button" style="margin-left: 15px" value='<openmrs:message code="general.cancel" />' onclick='javascript:window.location="${cancelUrl}"' />
+		<a style="margin-left: 15px" href='javascript:window.location="${cancelUrl}"'><openmrs:message code="general.cancel" /></a>
 		
 	</form:form>
 </div>
