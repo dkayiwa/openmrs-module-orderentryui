@@ -58,7 +58,7 @@ public class DrugOrderFormController {
 			drugOrder = Context.getOrderService().getOrder(orderId);
 		else {
 			drugOrder = new DrugOrder();
-			drugOrder.setCareSetting(Context.getOrderService().getCareSetting(2));
+			drugOrder.setCareSetting(Context.getOrderService().getCareSetting(1));
 			if (patientId != null)
 				drugOrder.setPatient(Context.getPatientService().getPatient(patientId));
 		}
