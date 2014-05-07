@@ -65,7 +65,7 @@
 			return;
 		}
 		
-		window.location = "<openmrs:contextPath/>/module/orderentryui/drugOrder.form?patientId=${model.patient.patientId}&orderId=" + orderId + "&action=REVISE";
+		window.location = "<openmrs:contextPath/>/module/orderentryui/drugOrder.form?patientId=${model.patient.patientId}&orderId=" + orderId;
 	}
 	
 	function discontinueDrugOrder(row, orderId) {

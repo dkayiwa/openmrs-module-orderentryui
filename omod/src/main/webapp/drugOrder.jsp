@@ -2,10 +2,10 @@
 <%@ include file="/WEB-INF/template/header.jsp" %>
 
 <h2>
-<c:if test="${param.action == 'REVISE'}">
+<c:if test="${drugOrder.action == 'REVISE'}">
 Revise Drug Order
 </c:if>
-<c:if test="${param.action != 'REVISE'}">
+<c:if test="${drugOrder.action != 'REVISE'}">
 	Write a new Drug Order
 </c:if>
 </h2>
@@ -24,18 +24,12 @@ Revise Drug Order
 <b class="boxHeader">Drug Order Details</b>
 <div class="box">
 	<form:form method="post" action="drugOrder.form" modelAttribute="drugOrder">
-	
-		<c:if test="${drugOrder.patient.patientId != null}">
-			<c:if test="${param.orderId != null}">
-				<input type="hidden" name="orderId" value="${param.orderId}"/>
-			</c:if>
-			<c:if test="${param.patientId != null}">
-				<input type="hidden" name="patientId" value="${param.patientId}"/>
-			</c:if>
-		</c:if>
-		<c:if test="${param.action == 'REVISE'}">
-			<input type="hidden" name="action" value="${param.action}"/>
-		</c:if>
+
+        <input type="hidden" name="patient" value="${drugOrder.patient.patientId}"/>
+        <c:if test="${drugOrder.action == 'REVISE'}">
+            <input type="hidden" name="action" value="REVISE"/>
+            <input type="hidden" name="previousOrder" value="${drugOrder.previousOrder.orderId}"/>
+        </c:if>
 	
 		<table class="left-aligned-th" cellpadding="3" cellspacing="3">
 			<tr>

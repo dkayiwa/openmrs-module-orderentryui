@@ -50,12 +50,11 @@ public class DrugOrderFormController {
 	
 	@ModelAttribute("drugOrder")
 	public Order getDrugOrder(@RequestParam(value = "orderId", required = false) Integer orderId,
-	        @RequestParam(value = "patientId", required = false) Integer patientId,
-	        @RequestParam(value = "action", required = false) String action, ModelMap model) {
+	        @RequestParam(value = "patientId", required = false) Integer patientId, ModelMap model) {
 		
 		Order drugOrder = null;
 		if (orderId != null)
-			drugOrder = Context.getOrderService().getOrder(orderId);
+			drugOrder = Context.getOrderService().getOrder(orderId).cloneForRevision();
 		else {
 			drugOrder = new DrugOrder();
 			drugOrder.setCareSetting(Context.getOrderService().getCareSetting(1));
@@ -79,17 +78,8 @@ public class DrugOrderFormController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.POST, value = "/module/orderentryui/drugOrder")
-	public String saveDrugOrder(HttpServletRequest request, 
-	                            @RequestParam(value = "action", required = false) String action,
-	                            @ModelAttribute("drugOrder") DrugOrder drugOrder, 
+	public String saveDrugOrder(HttpServletRequest request, @ModelAttribute("drugOrder") DrugOrder drugOrder,
 	                            BindingResult result) {
-		
-		if ("REVISE".equals(action)) {
-			DrugOrder revisedOrder = drugOrder.cloneForRevision();
-			revisedOrder.setEncounter(drugOrder.getEncounter());
-			revisedOrder.setOrderer(drugOrder.getOrderer());
-			drugOrder = revisedOrder;
-		}
 		
 		if (drugOrder.getOrderer() == null) {
 			drugOrder.setOrderer(Context.getProviderService().getAllProviders().get(0));
@@ -101,9 +91,11 @@ public class DrugOrderFormController {
 			encounter.setEncounterType(Context.getEncounterService().getAllEncounterTypes().get(0));
 			Context.getEncounterService().saveEncounter(encounter);
 			drugOrder.setEncounter(encounter);
-			
-			drugOrder.setOrderType(Context.getOrderService().getOrderTypeByUuid("2ca568f3-a64a-11e3-9aeb-50e549534c5e"));
 		}
+        if(drugOrder.getPreviousOrder() != null){
+            drugOrder.setCareSetting(drugOrder.getPreviousOrder().getCareSetting());
+            drugOrder.setOrderType(drugOrder.getPreviousOrder().getOrderType());
+        }
 		
 		new DrugOrderValidator().validate(drugOrder, result);
 		if (!result.hasErrors()) {

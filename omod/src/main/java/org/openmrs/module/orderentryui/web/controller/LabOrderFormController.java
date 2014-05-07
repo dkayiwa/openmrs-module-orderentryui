@@ -50,12 +50,11 @@ public class LabOrderFormController {
 	
 	@ModelAttribute("labOrder")
 	public Order getLabOrder(@RequestParam(value = "orderId", required = false) Integer orderId,
-	        @RequestParam(value = "patientId", required = false) Integer patientId,
-	        @RequestParam(value = "action", required = false) String action, ModelMap model) {
+	        @RequestParam(value = "patientId", required = false) Integer patientId, ModelMap model) {
 		
 		Order labOrder = null;
 		if (orderId != null) {
-			labOrder = Context.getOrderService().getOrder(orderId);
+			labOrder = Context.getOrderService().getOrder(orderId).cloneForRevision();
 		}
 		else {
 			labOrder = new TestOrder();
@@ -80,18 +79,9 @@ public class LabOrderFormController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.POST, value = "/module/orderentryui/labOrder")
 	public String saveLabOrder(HttpServletRequest request,
-	                           @RequestParam(value = "action", required = false) String action,
 	                           @ModelAttribute("labOrder") TestOrder labOrder, BindingResult result) {
-		
-		
-		if ("REVISE".equals(action)) {
-			TestOrder revisedOrder = labOrder.cloneForRevision();
-			revisedOrder.setEncounter(labOrder.getEncounter());
-			revisedOrder.setOrderer(labOrder.getOrderer());
-			labOrder = revisedOrder;
-		}
-		
-		if (labOrder.getOrderer() == null) {
+
+        if (labOrder.getOrderer() == null) {
 			labOrder.setOrderer(Context.getProviderService().getAllProviders().get(0));
 			
 			Encounter encounter = new Encounter();
@@ -100,11 +90,12 @@ public class LabOrderFormController {
 			encounter.setEncounterType(Context.getEncounterService().getAllEncounterTypes().get(0));
 			Context.getEncounterService().saveEncounter(encounter);
 			labOrder.setEncounter(encounter);
-			
-			// Ideally, the API would do this for you
-			labOrder.setOrderType(Context.getOrderService().getOrderTypeByUuid("52a447d3-a64a-11e3-9aeb-50e549534c5e"));
 		}
-		
+        if(labOrder.getPreviousOrder() != null){
+            labOrder.setCareSetting(labOrder.getPreviousOrder().getCareSetting());
+            labOrder.setOrderType(labOrder.getPreviousOrder().getOrderType());
+        }
+
 		new OrderValidator().validate(labOrder, result);
 		if (!result.hasErrors()) {
 			try {
@@ -117,7 +108,7 @@ public class LabOrderFormController {
 				request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR, "TestOrder.save.error");
 			}
 		}
-		
+
 		return null;
 	}
 }
