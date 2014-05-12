@@ -194,7 +194,7 @@ Revise Drug Order
 			
 
 			<tr class="simple">
-				<th>Start Date</th>
+				<th>Encounter Date</th>
 				<td>
 					<spring:bind path="startDate">
 						<openmrs_tag:dateField formFieldName="${status.expression}" startValue="${status.value}" />
