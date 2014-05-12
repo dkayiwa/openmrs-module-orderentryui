@@ -65,6 +65,9 @@ public class DrugOrderFormController {
 		model.put("frequencies", Context.getOrderService().getOrderFrequencies(true));
 		model.put("drugs", Context.getConceptService().getAllDrugs());
 		model.put("drugRoutes", Context.getOrderService().getDrugRoutes());
+		model.put("doseUnitsOptions", Context.getOrderService().getDrugDosingUnits());
+		model.put("durationUnitsOptions", Context.getOrderService().getDrugDurationUnits());
+		model.put("quantityUnitsOptions", Context.getOrderService().getDrugDispensingUnits());
 		
 		return drugOrder;
 	}

@@ -68,7 +68,14 @@ Revise Drug Order
 				<th>Dose Units</th>
 				<td>
 					<spring:bind path="doseUnits">
-						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="doseUnits" initialValue="${status.value}" includeClasses="Unit of Measurement" />
+						<select name="${status.expression}">
+							<option></option>
+							<c:forEach items="${doseUnitsOptions}" var="doseUnitsOption">
+					        	<option value="${doseUnitsOption.conceptId}" <c:if test="${doseUnitsOption.conceptId == status.value}">selected="selected"</c:if>>
+					        		${doseUnitsOption.name.name}
+					        	</option>
+					        </c:forEach>
+						</select>
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
@@ -127,7 +134,14 @@ Revise Drug Order
 				<th>Duration Units</th>
 				<td>
 					<spring:bind path="durationUnits">
-						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="durationUnits" initialValue="${status.value}" includeClasses="Unit of Measurement" />
+						<select name="${status.expression}">
+							<option></option>
+							<c:forEach items="${durationUnitsOptions}" var="durationUnitsOption">
+					        	<option value="${durationUnitsOption.conceptId}" <c:if test="${durationUnitsOption.conceptId == status.value}">selected="selected"</c:if>>
+					        		${durationUnitsOption.name.name}
+					        	</option>
+					        </c:forEach>
+						</select>
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
@@ -154,8 +168,15 @@ Revise Drug Order
 				<th>Quantity Units</th>
 				<td>
 					<spring:bind path="quantityUnits">
-						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="quantityUnits" initialValue="${status.value}" includeClasses="Unit of Measurement" />
-						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+						<select name="${status.expression}">
+							<option></option>
+							<c:forEach items="${quantityUnitsOptions}" var="quantityUnitsOption">
+					        	<option value="${quantityUnitsOption.conceptId}" <c:if test="${quantityUnitsOption.conceptId == status.value}">selected="selected"</c:if>>
+					        		${quantityUnitsOption.name.name}
+					        	</option>
+					        </c:forEach>
+						</select>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>	
 					</spring:bind>
 				</td>
 			</tr>
