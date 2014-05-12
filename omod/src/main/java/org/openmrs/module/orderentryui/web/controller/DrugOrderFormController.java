@@ -90,7 +90,7 @@ public class DrugOrderFormController {
 			
 			Encounter encounter = new Encounter();
 			encounter.setPatient(drugOrder.getPatient());
-			encounter.setEncounterDatetime(new Date());
+			encounter.setEncounterDatetime(drugOrder.getStartDate() != null ? drugOrder.getStartDate() : new Date());
 			encounter.setEncounterType(Context.getEncounterService().getAllEncounterTypes().get(0));
 			Context.getEncounterService().saveEncounter(encounter);
 			drugOrder.setEncounter(encounter);

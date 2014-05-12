@@ -86,7 +86,7 @@ public class LabOrderFormController {
 			
 			Encounter encounter = new Encounter();
 			encounter.setPatient(labOrder.getPatient());
-			encounter.setEncounterDatetime(new Date());
+			encounter.setEncounterDatetime(labOrder.getStartDate() != null ? labOrder.getStartDate() : new Date());
 			encounter.setEncounterType(Context.getEncounterService().getAllEncounterTypes().get(0));
 			Context.getEncounterService().saveEncounter(encounter);
 			labOrder.setEncounter(encounter);
