@@ -231,15 +231,6 @@ Revise Drug Order
 				</td>
 			</tr>
 			<tr class="simple">
-				<th>Order Number</th>
-				<td>
-					<spring:bind path="orderNumber">
-						<input type="text" name="orderNumber" value="${status.value}"/>
-						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
-					</spring:bind>
-				</td>
-			</tr>
-			<tr class="simple">
 				<th>Comment to Fulfiller</th>
 				<td>
 					<spring:bind path="commentToFulfiller">
@@ -253,15 +244,6 @@ Revise Drug Order
 				<td>
 					<spring:bind path="scheduledDate">
 						<openmrs_tag:dateField formFieldName="${status.expression}" startValue="${status.value}" />
-						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
-					</spring:bind>
-				</td>
-			</tr>
-			<tr class="simple">
-				<th>Accession Number</th>
-				<td>
-					<spring:bind path="accessionNumber">
-						<input type="text" name="accessionNumber" value="${status.value}"/>
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
