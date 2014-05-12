@@ -192,15 +192,7 @@ Revise Drug Order
 			
 			
 			
-			<tr class="simple">
-				<th>Instructions</th>
-				<td>
-					<spring:bind path="instructions">
-						<input type="text" name="instructions" value="${status.value}"/>
-						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
-					</spring:bind>
-				</td>
-			</tr>
+
 			<tr class="simple">
 				<th>Start Date</th>
 				<td>
