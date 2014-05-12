@@ -96,6 +96,111 @@ Revise Lab Order
 					</select>
 				</td>
 			</tr>
+			<tr class="simple">
+				<th>Number of repeats</th>
+				<td>
+					<spring:bind path="numberOfRepeats">
+						<input type="text" name="numberOfRepeats" value="${status.value}"/>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			
+			<tr class="simple">
+				<th>Instructions</th>
+				<td>
+					<spring:bind path="instructions">
+						<input type="text" name="instructions" value="${status.value}"/>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr class="simple">
+				<th>Start Date</th>
+				<td>
+					<spring:bind path="startDate">
+						<openmrs_tag:dateField formFieldName="${status.expression}" startValue="${status.value}" />
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr class="simple">
+				<th>Auto Expire Date</th>
+				<td>
+					<spring:bind path="autoExpireDate">
+						<openmrs_tag:dateField formFieldName="${status.expression}" startValue="${status.value}" />
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr class="simple">
+				<th>Order Reason</th>
+				<td>
+					<spring:bind path="orderReason">
+						<openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="orderReason" initialValue="${status.value}"/>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr class="simple">
+				<th>Order Reason Non Coded</th>
+				<td>
+					<spring:bind path="orderReasonNonCoded">
+						<input type="text" name="orderReasonNonCoded" value="${status.value}"/>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr class="simple">
+				<th>Urgency</th>
+				<td>
+					<spring:bind path="urgency">
+						<select name="urgency">
+							<option value=""></option>
+							<option value="ROUTINE">Routine</option>
+							<option value="STAT">Stat</option>
+							<option value="ON_SCHEDULED_DATE">On Scheduled Date</option>
+						</select>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr class="simple">
+				<th>Order Number</th>
+				<td>
+					<spring:bind path="orderNumber">
+						<input type="text" name="orderNumber" value="${status.value}"/>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr class="simple">
+				<th>Comment to Fulfiller</th>
+				<td>
+					<spring:bind path="commentToFulfiller">
+						<input type="text" name="commentToFulfiller" value="${status.value}"/>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr class="simple">
+				<th>Scheduled Date</th>
+				<td>
+					<spring:bind path="scheduledDate">
+						<openmrs_tag:dateField formFieldName="${status.expression}" startValue="${status.value}" />
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr class="simple">
+				<th>Accession Number</th>
+				<td>
+					<spring:bind path="accessionNumber">
+						<input type="text" name="accessionNumber" value="${status.value}"/>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
 		</table>
 		
 		<br/>
