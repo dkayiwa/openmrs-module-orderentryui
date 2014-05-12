@@ -96,7 +96,7 @@ Revise Lab Order
 					</select>
 				</td>
 			</tr>
-			<tr class="simple">
+			<tr>
 				<th>Number of repeats</th>
 				<td>
 					<spring:bind path="numberOfRepeats">
@@ -106,7 +106,7 @@ Revise Lab Order
 				</td>
 			</tr>
 			
-			<tr class="simple">
+			<tr>
 				<th>Instructions</th>
 				<td>
 					<spring:bind path="instructions">
@@ -115,7 +115,7 @@ Revise Lab Order
 					</spring:bind>
 				</td>
 			</tr>
-			<tr class="simple">
+			<tr>
 				<th>Start Date</th>
 				<td>
 					<spring:bind path="startDate">
@@ -124,7 +124,7 @@ Revise Lab Order
 					</spring:bind>
 				</td>
 			</tr>
-			<tr class="simple">
+			<tr>
 				<th>Auto Expire Date</th>
 				<td>
 					<spring:bind path="autoExpireDate">
@@ -133,7 +133,7 @@ Revise Lab Order
 					</spring:bind>
 				</td>
 			</tr>
-			<tr class="simple">
+			<tr>
 				<th>Order Reason</th>
 				<td>
 					<spring:bind path="orderReason">
@@ -142,7 +142,7 @@ Revise Lab Order
 					</spring:bind>
 				</td>
 			</tr>
-			<tr class="simple">
+			<tr>
 				<th>Order Reason Non Coded</th>
 				<td>
 					<spring:bind path="orderReasonNonCoded">
@@ -151,7 +151,7 @@ Revise Lab Order
 					</spring:bind>
 				</td>
 			</tr>
-			<tr class="simple">
+			<tr>
 				<th>Urgency</th>
 				<td>
 					<spring:bind path="urgency">
@@ -165,7 +165,7 @@ Revise Lab Order
 					</spring:bind>
 				</td>
 			</tr>
-			<tr class="simple">
+			<tr>
 				<th>Comment to Fulfiller</th>
 				<td>
 					<spring:bind path="commentToFulfiller">
@@ -174,7 +174,7 @@ Revise Lab Order
 					</spring:bind>
 				</td>
 			</tr>
-			<tr class="simple">
+			<tr>
 				<th>Scheduled Date</th>
 				<td>
 					<spring:bind path="scheduledDate">

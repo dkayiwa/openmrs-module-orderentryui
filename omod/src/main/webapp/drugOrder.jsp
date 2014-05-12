@@ -193,7 +193,7 @@ Revise Drug Order
 			
 			
 
-			<tr class="simple">
+			<tr>
 				<th>Encounter Date</th>
 				<td>
 					<spring:bind path="startDate">
@@ -202,7 +202,7 @@ Revise Drug Order
 					</spring:bind>
 				</td>
 			</tr>
-			<tr class="simple">
+			<tr>
 				<th>Auto Expire Date</th>
 				<td>
 					<spring:bind path="autoExpireDate">
@@ -211,7 +211,7 @@ Revise Drug Order
 					</spring:bind>
 				</td>
 			</tr>
-			<tr class="simple">
+			<tr>
 				<th>Order Reason</th>
 				<td>
 					<spring:bind path="orderReason">
@@ -220,7 +220,7 @@ Revise Drug Order
 					</spring:bind>
 				</td>
 			</tr>
-			<tr class="simple">
+			<tr>
 				<th>Order Reason Non Coded</th>
 				<td>
 					<spring:bind path="orderReasonNonCoded">
@@ -229,7 +229,7 @@ Revise Drug Order
 					</spring:bind>
 				</td>
 			</tr>
-			<tr class="simple">
+			<tr>
 				<th>Urgency</th>
 				<td>
 					<spring:bind path="urgency">
@@ -243,7 +243,7 @@ Revise Drug Order
 					</spring:bind>
 				</td>
 			</tr>
-			<tr class="simple">
+			<tr>
 				<th>Comment to Fulfiller</th>
 				<td>
 					<spring:bind path="commentToFulfiller">
@@ -252,7 +252,7 @@ Revise Drug Order
 					</spring:bind>
 				</td>
 			</tr>
-			<tr class="simple">
+			<tr>
 				<th>Scheduled Date</th>
 				<td>
 					<spring:bind path="scheduledDate">
