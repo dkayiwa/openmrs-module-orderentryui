@@ -111,6 +111,6 @@ public class LabOrderFormController {
 			}
 		}
 
-		return null;
+		return "/module/orderentryui/labOrder.jsp?patientId=" + labOrder.getPatient().getPatientId();
 	}
 }

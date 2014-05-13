@@ -115,6 +115,6 @@ public class DrugOrderFormController {
 			}
 		}
 		
-		return null;
+		return "/module/orderentryui/drugOrder.jsp?patientId=" + drugOrder.getPatient().getPatientId();
 	}
 }
