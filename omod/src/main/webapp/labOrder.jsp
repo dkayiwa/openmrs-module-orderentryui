@@ -48,6 +48,20 @@ Revise Lab Order
 				</td>
 			</tr>
 			<tr>
+				<th>Urgency</th>
+				<td>
+					<spring:bind path="urgency">
+						<select name="urgency">
+							<option value=""></option>
+							<option value="ROUTINE">Routine</option>
+							<option value="STAT">Stat</option>
+							<option value="ON_SCHEDULED_DATE">On Scheduled Date</option>
+						</select>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+			</tr>
+			<tr>
 				<th>Frequency</th>
 				<td>
 					<spring:bind path="frequency">
@@ -147,20 +161,6 @@ Revise Lab Order
 				<td>
 					<spring:bind path="orderReasonNonCoded">
 						<input type="text" name="orderReasonNonCoded" value="${status.value}"/>
-						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
-					</spring:bind>
-				</td>
-			</tr>
-			<tr>
-				<th>Urgency</th>
-				<td>
-					<spring:bind path="urgency">
-						<select name="urgency">
-							<option value=""></option>
-							<option value="ROUTINE">Routine</option>
-							<option value="STAT">Stat</option>
-							<option value="ON_SCHEDULED_DATE">On Scheduled Date</option>
-						</select>
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
