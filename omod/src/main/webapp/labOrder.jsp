@@ -1,6 +1,8 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 <%@ include file="/WEB-INF/template/header.jsp" %>
 
+<openmrs:htmlInclude file="/scripts/calendar/calendar.js" />
+
 <h2>
 <c:if test="${labOrder.action == 'REVISE'}">
 Revise Lab Order
@@ -133,7 +135,7 @@ Revise Lab Order
 				<th>Start Date</th>
 				<td>
 					<spring:bind path="startDate">
-						<openmrs_tag:dateField formFieldName="${status.expression}" startValue="${status.value}" />
+						<input type="text" name="${status.expression}" size="20" value="${status.value}" onfocus="showCalendar(this)" />
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
@@ -142,7 +144,7 @@ Revise Lab Order
 				<th>Auto Expire Date</th>
 				<td>
 					<spring:bind path="autoExpireDate">
-						<openmrs_tag:dateField formFieldName="${status.expression}" startValue="${status.value}" />
+						<input type="text" name="${status.expression}" size="20" value="${status.value}" onfocus="showCalendar(this)" />
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
@@ -178,7 +180,7 @@ Revise Lab Order
 				<th>Scheduled Date</th>
 				<td>
 					<spring:bind path="scheduledDate">
-						<openmrs_tag:dateField formFieldName="${status.expression}" startValue="${status.value}" />
+						<input type="text" name="${status.expression}" size="20" value="${status.value}" onfocus="showCalendar(this)" />
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
