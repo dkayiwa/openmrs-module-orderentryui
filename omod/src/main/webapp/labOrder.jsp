@@ -53,9 +53,9 @@ Revise Lab Order
 					<spring:bind path="urgency">
 						<select name="urgency">
 							<option value=""></option>
-							<option value="ROUTINE">Routine</option>
-							<option value="STAT">Stat</option>
-							<option value="ON_SCHEDULED_DATE">On Scheduled Date</option>
+							<option value="ROUTINE" <c:if test="${'ROUTINE' == status.value}">selected="selected"</c:if>>Routine</option>
+							<option value="STAT" <c:if test="${'STAT' == status.value}">selected="selected"</c:if>>Stat</option>
+							<option value="ON_SCHEDULED_DATE" <c:if test="${'ON_SCHEDULED_DATE' == status.value}">selected="selected"</c:if>>On Scheduled Date</option>
 						</select>
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>

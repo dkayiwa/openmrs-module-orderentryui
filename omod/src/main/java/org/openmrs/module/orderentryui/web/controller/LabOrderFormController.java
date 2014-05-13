@@ -22,6 +22,7 @@ import org.openmrs.Encounter;
 import org.openmrs.Order;
 import org.openmrs.OrderFrequency;
 import org.openmrs.TestOrder;
+import org.openmrs.Order.Urgency;
 import org.openmrs.TestOrder.Laterality;
 import org.openmrs.api.APIException;
 import org.openmrs.api.context.Context;
@@ -58,6 +59,7 @@ public class LabOrderFormController {
 		}
 		else {
 			labOrder = new TestOrder();
+			labOrder.setUrgency(Urgency.ROUTINE);
 			labOrder.setCareSetting(Context.getOrderService().getCareSetting(1));
 			if (patientId != null)
 				labOrder.setPatient(Context.getPatientService().getPatient(patientId));

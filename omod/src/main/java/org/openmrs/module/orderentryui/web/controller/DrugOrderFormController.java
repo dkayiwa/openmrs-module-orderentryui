@@ -22,6 +22,7 @@ import org.openmrs.DrugOrder;
 import org.openmrs.DrugOrder.DosingType;
 import org.openmrs.Encounter;
 import org.openmrs.Order;
+import org.openmrs.Order.Urgency;
 import org.openmrs.OrderFrequency;
 import org.openmrs.api.APIException;
 import org.openmrs.api.context.Context;
@@ -57,6 +58,7 @@ public class DrugOrderFormController {
 			drugOrder = Context.getOrderService().getOrder(orderId).cloneForRevision();
 		else {
 			drugOrder = new DrugOrder();
+			drugOrder.setUrgency(Urgency.ROUTINE);
 			drugOrder.setCareSetting(Context.getOrderService().getCareSetting(1));
 			if (patientId != null)
 				drugOrder.setPatient(Context.getPatientService().getPatient(patientId));
