@@ -54,12 +54,19 @@ Revise Drug Order
 				<th>Urgency</th>
 				<td>
 					<spring:bind path="urgency">
-						<select name="urgency">
+						<select id="urgency" name="urgency" onchange="adjustScheduledDate();">
 							<option value=""></option>
 							<option value="ROUTINE" <c:if test="${'ROUTINE' == status.value}">selected="selected"</c:if>>Routine</option>
 							<option value="STAT" <c:if test="${'STAT' == status.value}">selected="selected"</c:if>>Stat</option>
 							<option value="ON_SCHEDULED_DATE" <c:if test="${'ON_SCHEDULED_DATE' == status.value}">selected="selected"</c:if>>On Scheduled Date</option>
 						</select>
+						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+					</spring:bind>
+				</td>
+				<th class="scheduledDate">Scheduled Date</th>
+				<td class="scheduledDate">
+					<spring:bind path="scheduledDate">
+						<input type="text" id="scheduledDate" name="${status.expression}" size="20" value="${status.value}" onfocus="showCalendar(this)" />
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>
@@ -254,15 +261,6 @@ Revise Drug Order
 					</spring:bind>
 				</td>
 			</tr>
-			<tr>
-				<th>Scheduled Date</th>
-				<td>
-					<spring:bind path="scheduledDate">
-						<input type="text" name="${status.expression}" size="20" value="${status.value}" onfocus="showCalendar(this)" />
-						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
-					</spring:bind>
-				</td>
-			</tr>
 		</table>
 		
 		<br/>
@@ -296,6 +294,15 @@ function adjustAsNeededCondition() {
 	else
 		$j('#asNeededCondition').attr('disabled', 'disabled');
 }
+function adjustScheduledDate() {
+	if ($j('#urgency').val() == "ON_SCHEDULED_DATE") {
+		$j('.scheduledDate').show();
+	}
+	else {
+		$j('#scheduledDate').val("");
+		$j('.scheduledDate').hide();
+	}
+}
 $j(document).ready(function() {
 	$j('#outpatient, #inpatient').change(adjustToCareSetting);
 	$j('#simpleDosing, #freeTextDosing').change(adjustToDosingInstructionType)
@@ -303,6 +310,7 @@ $j(document).ready(function() {
 	adjustToCareSetting();
 	adjustToDosingInstructionType();
 	adjustAsNeededCondition();
+	adjustScheduledDate();
 })
 </script>
 
