@@ -101,7 +101,7 @@
 				<table id="drugOrdersTable">
 					<thead>
 						<tr>
-							<th>Order Type</th>
+							<th>Urgency</th>
 							<th>Medication</th>
 							<th>Dose</th>
 							<th>Frequency</th>
@@ -111,7 +111,7 @@
 					<tbody>
 						<c:forEach items="${model.orders}" var="order">
 				        	<tr>
-				        		<td>Drug Order</td>
+				        		<td>${order.urgency}</td>
 				        		<td>${order.drug.name}</td>
 				        		<td>${order.dose}</td>
 				        		<td>${order.frequency}</td>
