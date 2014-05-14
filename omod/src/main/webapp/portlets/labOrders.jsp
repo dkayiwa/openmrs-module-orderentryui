@@ -101,6 +101,7 @@
 				<table id="labOrdersTable">
 					<thead>
 						<tr>
+							<th>Care Setting</th>
 							<th>Urgency</th>
 							<th>Test Type</th>
 							<th>Frequency</th>
@@ -110,6 +111,7 @@
 					<tbody>
 						<c:forEach items="${model.orders}" var="order">
 				        	<tr>
+				        		<td>${order.careSetting.name}</td>
 				        		<td>${order.urgency}</td>
 				        		<td>${order.concept.name}</td>
 				        		<td>${order.frequency}</td>

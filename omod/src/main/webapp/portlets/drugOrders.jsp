@@ -101,6 +101,7 @@
 				<table id="drugOrdersTable">
 					<thead>
 						<tr>
+							<th>Care Setting</th>
 							<th>Urgency</th>
 							<th>Medication</th>
 							<th>Dose</th>
@@ -111,6 +112,7 @@
 					<tbody>
 						<c:forEach items="${model.orders}" var="order">
 				        	<tr>
+				        		<td>${order.careSetting.name}</td>
 				        		<td>${order.urgency}</td>
 				        		<td>${order.drug.name}</td>
 				        		<td>${order.dose}</td>
