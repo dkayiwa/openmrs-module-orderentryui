@@ -96,7 +96,14 @@ Revise Lab Order
 				<th>Specimen Source</th>
 				<td>
 					<spring:bind path="specimenSource">
-						<openmrs_tag:conceptField formFieldName="${status.expression}" initialValue="${status.value}" />
+						<select name="${status.expression}">
+							<option></option>
+							<c:forEach items="${specimenSources}" var="specimenSource">
+					        	<option value="${specimenSource.conceptId}" <c:if test="${specimenSource.conceptId == status.value}">selected="selected"</c:if>>
+					        		${specimenSource.name.name}
+					        	</option>
+					        </c:forEach>
+						</select>
 						<c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
 					</spring:bind>
 				</td>

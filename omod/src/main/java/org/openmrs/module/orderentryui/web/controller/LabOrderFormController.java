@@ -67,6 +67,7 @@ public class LabOrderFormController {
 		
 		model.put("frequencies", Context.getOrderService().getOrderFrequencies(true));
 		model.put("drugs", Context.getConceptService().getAllDrugs());
+		model.put("specimenSources", Context.getOrderService().getTestSpecimenSources());
 		
 		return labOrder;
 	}
