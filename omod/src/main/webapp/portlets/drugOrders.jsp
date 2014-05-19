@@ -103,10 +103,7 @@
 						<tr>
 							<th>Care Setting</th>
 							<th>Urgency</th>
-							<th>Medication</th>
-							<th>Dose</th>
-							<th>Frequency</th>
-							<th>Instructions</th>
+							<th>Drug Order</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -114,10 +111,7 @@
 				        	<tr>
 				        		<td>${order.careSetting.name}</td>
 				        		<td>${order.urgency}</td>
-				        		<td>${order.drug.name}</td>
-				        		<td>${order.dose}</td>
-				        		<td>${order.frequency}</td>
-				        		<td>${order.dosingInstructions}</td>
+				        		<td>${order.drugOrder}</td>
 				        		<td><a href="#" onclick="javascript:reviseDrugOrder(this.parentNode.parentNode, ${order.orderId});">Revise /</a></td>
 				        		<td><a href="#" onclick="javascript:discontinueDrugOrder(this.parentNode.parentNode, ${order.orderId});">Discontinue</a></td>
 				        	</tr>
