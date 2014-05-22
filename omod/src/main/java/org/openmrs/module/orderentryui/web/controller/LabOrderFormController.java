@@ -20,9 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.openmrs.CareSetting;
 import org.openmrs.Encounter;
 import org.openmrs.Order;
+import org.openmrs.Order.Urgency;
 import org.openmrs.OrderFrequency;
 import org.openmrs.TestOrder;
-import org.openmrs.Order.Urgency;
 import org.openmrs.TestOrder.Laterality;
 import org.openmrs.api.APIException;
 import org.openmrs.api.context.Context;
@@ -43,7 +43,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LabOrderFormController {
-
+	
 	@RequestMapping(value = "/module/orderentryui/labOrder", method = RequestMethod.GET)
 	public void showForm() {
 		
@@ -51,13 +51,12 @@ public class LabOrderFormController {
 	
 	@ModelAttribute("labOrder")
 	public Order getLabOrder(@RequestParam(value = "orderId", required = false) Integer orderId,
-	        @RequestParam(value = "patientId", required = false) Integer patientId, ModelMap model) {
+	                         @RequestParam(value = "patientId", required = false) Integer patientId, ModelMap model) {
 		
 		Order labOrder = null;
 		if (orderId != null) {
 			labOrder = Context.getOrderService().getOrder(orderId).cloneForRevision();
-		}
-		else {
+		} else {
 			labOrder = new TestOrder();
 			labOrder.setUrgency(Urgency.ROUTINE);
 			labOrder.setCareSetting(Context.getOrderService().getCareSetting(1));
@@ -81,10 +80,10 @@ public class LabOrderFormController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.POST, value = "/module/orderentryui/labOrder")
-	public String saveLabOrder(HttpServletRequest request,
-	                           @ModelAttribute("labOrder") TestOrder labOrder, BindingResult result) {
-
-        if (labOrder.getOrderer() == null) {
+	public String saveLabOrder(HttpServletRequest request, @ModelAttribute("labOrder") TestOrder labOrder,
+	                           BindingResult result) {
+		
+		if (labOrder.getOrderer() == null) {
 			labOrder.setOrderer(Context.getProviderService().getAllProviders().get(0));
 			
 			Encounter encounter = new Encounter();
@@ -94,11 +93,7 @@ public class LabOrderFormController {
 			Context.getEncounterService().saveEncounter(encounter);
 			labOrder.setEncounter(encounter);
 		}
-        if(labOrder.getPreviousOrder() != null){
-            labOrder.setCareSetting(labOrder.getPreviousOrder().getCareSetting());
-            labOrder.setOrderType(labOrder.getPreviousOrder().getOrderType());
-        }
-
+		
 		new OrderValidator().validate(labOrder, result);
 		if (!result.hasErrors()) {
 			try {
@@ -111,7 +106,7 @@ public class LabOrderFormController {
 				request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR, "TestOrder.save.error");
 			}
 		}
-
+		
 		return "/module/orderentryui/labOrder.jsp?patientId=" + labOrder.getPatient().getPatientId();
 	}
 }

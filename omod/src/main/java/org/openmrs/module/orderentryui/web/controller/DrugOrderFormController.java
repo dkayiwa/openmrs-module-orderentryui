@@ -51,7 +51,7 @@ public class DrugOrderFormController {
 	
 	@ModelAttribute("drugOrder")
 	public Order getDrugOrder(@RequestParam(value = "orderId", required = false) Integer orderId,
-	        @RequestParam(value = "patientId", required = false) Integer patientId, ModelMap model) {
+	                          @RequestParam(value = "patientId", required = false) Integer patientId, ModelMap model) {
 		
 		Order drugOrder = null;
 		if (orderId != null)
@@ -68,7 +68,7 @@ public class DrugOrderFormController {
 		model.put("drugs", Context.getConceptService().getAllDrugs());
 		model.put("drugRoutes", Context.getOrderService().getDrugRoutes());
 		model.put("doseUnitsOptions", Context.getOrderService().getDrugDosingUnits());
-		model.put("durationUnitsOptions", Context.getOrderService().getDrugDurationUnits());
+		model.put("durationUnitsOptions", Context.getOrderService().getDurationUnits());
 		model.put("quantityUnitsOptions", Context.getOrderService().getDrugDispensingUnits());
 		
 		return drugOrder;
@@ -97,10 +97,6 @@ public class DrugOrderFormController {
 			Context.getEncounterService().saveEncounter(encounter);
 			drugOrder.setEncounter(encounter);
 		}
-        if(drugOrder.getPreviousOrder() != null){
-            drugOrder.setCareSetting(drugOrder.getPreviousOrder().getCareSetting());
-            drugOrder.setOrderType(drugOrder.getPreviousOrder().getOrderType());
-        }
 		
 		new DrugOrderValidator().validate(drugOrder, result);
 		if (!result.hasErrors()) {
