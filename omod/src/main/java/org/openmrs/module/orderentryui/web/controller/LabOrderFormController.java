@@ -103,7 +103,8 @@ public class LabOrderFormController {
 				return "redirect:" + "/patientDashboard.form?patientId=" + labOrder.getPatient().getPatientId();
 			}
 			catch (APIException e) {
-				request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR, "TestOrder.save.error");
+				request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR,
+				    "Failed to save test order: " + e.getMessage());
 			}
 		}
 		

@@ -107,7 +107,8 @@ public class DrugOrderFormController {
 				return "redirect:" + "/patientDashboard.form?patientId=" + drugOrder.getPatient().getPatientId();
 			}
 			catch (APIException e) {
-				request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR, "DrugOrder.save.error");
+				request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR,
+				    "Failed to save drug order: " + e.getMessage());
 			}
 		}
 		
